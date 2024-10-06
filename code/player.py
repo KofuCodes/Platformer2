@@ -90,7 +90,7 @@ class Player(pygame.sprite.Sprite):
                 return True
             return None
 
-        self.specials.append(Special(dashability, dashpre, dashpost, 'dash', 120, pygame.K_LSHIFT, self.sett))
+        self.specials.append(Special(dashability, dashpre, dashpost, 'dash', 120, pygame.K_c, self.sett))
 
     def import_character_assets(self):
         character_path = "./graphics/character/"
@@ -155,7 +155,7 @@ class Player(pygame.sprite.Sprite):
         elif self.direction.x < 0 and self.on_left:
             self.direction.x = 0
 
-        if keys[pygame.K_d]:
+        if keys[pygame.K_RIGHT]:
             if self.direction.x == -1 or self.direction.x == 0:
                 self.direction.x = 1
             elif self.direction.x < 1:
@@ -163,7 +163,7 @@ class Player(pygame.sprite.Sprite):
             elif self.direction.x > 1:
                 self.direction.x -= 0.1
             self.facing_right = True
-        elif keys[pygame.K_a]:
+        elif keys[pygame.K_LEFT]:
             if self.direction.x == 1 or self.direction.x == 0:
                 self.direction.x = -1
             elif self.direction.x > -1:
@@ -182,7 +182,7 @@ class Player(pygame.sprite.Sprite):
         if self.on_ground or (self.on_left and not self.on_tree_left) or (self.on_right and not self.on_tree_right):
             self.jumps = 2
 
-        if keys[pygame.K_SPACE] and (
+        if keys[pygame.K_z] and (
                 self.on_ground or self.on_left or self.on_right or self.jumps > 0) and self.can_jump:
             if self.jumps > 0:
                 self.can_jump = False
@@ -194,7 +194,7 @@ class Player(pygame.sprite.Sprite):
                 self.create_jump_particles(self.rect.midbottom)
                 self.jumps -= 1
 
-        if not keys[pygame.K_SPACE]:
+        if not keys[pygame.K_z]:
             self.can_jump = True
 
         if keys[pygame.K_0]:
